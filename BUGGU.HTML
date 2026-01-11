@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Buggu ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Comic Sans MS','Poppins',sans-serif}
+
+/* 🌙 Romantic Night Background */
+body{
+ height:100vh;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ overflow:hidden;
+ background:
+ linear-gradient(rgba(20,20,40,.78),rgba(40,20,60,.82)),
+ radial-gradient(circle at top, #1a1a3d, #000);
+ animation:bgZoom 26s ease-in-out infinite;
+ color:#fff;
+}
+
+@keyframes bgZoom{
+ 0%{background-size:100%}
+ 50%{background-size:112%}
+ 100%{background-size:100%}
+}
+
+/* 🌙 Moon */
+.moon{
+ position:absolute;
+ top:8%;
+ left:-18%;
+ width:140px;height:140px;
+ border-radius:50%;
+ background:radial-gradient(circle at 30% 30%, #fff, #f5f3ce);
+ box-shadow:0 0 40px rgba(255,255,220,.9);
+ animation:moonMove 70s linear infinite;
+ z-index:1;
+}
+@keyframes moonMove{to{transform:translateX(150vw)}}
+
+/* ✨ Stars */
+.star{
+ position:absolute;
+ width:3px;height:3px;
+ background:#fff;border-radius:50%;
+ opacity:0;
+ animation:twinkle 3s infinite;
+}
+@keyframes twinkle{
+ 0%,100%{opacity:0}
+ 50%{opacity:1}
+}
+
+/* 🌸 Petals */
+.petal{
+ position:absolute;
+ top:-40px;
+ font-size:22px;
+ opacity:.85;
+ animation:fallPetal linear forwards;
+}
+@keyframes fallPetal{
+ to{transform:translateY(120vh) rotate(360deg)}
+}
+
+/* 💫 Shooting Star */
+.shoot{
+ position:absolute;
+ width:180px;height:2px;
+ background:linear-gradient(90deg,transparent,#fff,transparent);
+ animation:shoot 2.4s ease-out forwards;
+}
+@keyframes shoot{
+ to{transform:translateX(170vw) translateY(40vh);opacity:0}
+}
+
+/* 💖 Card */
+.page{
+ position:absolute;
+ left:50%;top:50%;
+ transform:translate(-50%,-50%) scale(.95);
+ width:90%;max-width:420px;
+ background:rgba(255,255,255,.92);
+ padding:36px 28px;
+ border-radius:38px;
+ text-align:center;
+ color:#444;
+ box-shadow:0 30px 70px rgba(0,0,0,.45);
+ opacity:0;
+ transition:1s ease;
+ z-index:2;
+}
+.page.active{
+ opacity:1;
+ transform:translate(-50%,-50%) scale(1);
+}
+
+h1{font-size:26px;color:#ff8fcf}
+.content{
+ margin-top:20px;
+ font-size:18px;
+ line-height:1.75;
+ min-height:190px;
+ white-space:pre-line;
+}
+
+/* Cursor */
+.cursor{
+ display:inline-block;
+ width:6px;height:18px;
+ background:#ff8fcf;
+ margin-left:4px;
+ animation:blink 1.2s infinite;
+}
+@keyframes blink{50%{opacity:0}}
+
+/* ❤️ Button */
+.heart-btn{
+ position:absolute;
+ bottom:26px;
+ left:50%;
+ transform:translateX(-50%);
+ width:86px;height:86px;
+ border-radius:50%;
+ background:radial-gradient(circle at 30% 30%, #ffb3d9, #ff4d6d);
+ border:none;
+ color:#fff;
+ font-size:13px;
+ font-weight:bold;
+ cursor:pointer;
+ animation:heartPulse 2.2s infinite;
+ z-index:3;
+}
+@keyframes heartPulse{
+ 70%{box-shadow:0 0 0 24px rgba(255,77,109,0)}
+}
+.hide{display:none}
+
+/* 🎶 Music Button */
+#musicBtn{
+ position:fixed;
+ top:20px;right:20px;
+ background:#ff4d6d;
+ color:white;
+ border:none;
+ padding:10px 14px;
+ border-radius:20px;
+ cursor:pointer;
+ z-index:5;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎶 MUSIC -->
+<audio id="loveSong" loop>
+ <source src="WhatsApp Audio 2026-01-11 at 21.55.52 - Copy (online-audio-converter.com).mp3" type="audio/mpeg">
+</audio>
+
+<div class="moon"></div>
+
+<!-- 🌸 Pages -->
+<div class="page active">
+ <h1>Hey Buggu 🌙</h1>
+ <div class="content" data-text="In this quiet night…
+I think of you…
+and my heart feels full 🥹"></div>
+</div>
+
+<div class="page">
+ <h1>My Calm 💖</h1>
+ <div class="content" data-text="Buggu,
+your smile is my peace
+even in the darkest nights ✨"></div>
+</div>
+
+<div class="page">
+ <h1>Truth 🌸</h1>
+ <div class="content" data-text="You are not just cute…
+you are my safe place 🫶"></div>
+</div>
+
+<div class="page">
+ <h1>I Love You Buggu ❤️</h1>
+ <div class="content" data-text="Buggu…
+I don’t have big words…
+I only have a true heart 🥹
+
+You are my home,
+my peace,
+my forever ❤️"></div>
+</div>
+
+<button class="heart-btn" id="nextBtn">Next<br>Love</button>
+<button id="musicBtn">🔊 Music</button>
+
+<script>
+/* Stars */
+for(let i=0;i<40;i++){
+ let s=document.createElement("div");
+ s.className="star";
+ s.style.left=Math.random()*100+"vw";
+ s.style.top=Math.random()*100+"vh";
+ s.style.animationDelay=Math.random()*3+"s";
+ document.body.appendChild(s);
+}
+
+/* Petals */
+setInterval(()=>{
+ let p=document.createElement("div");
+ p.className="petal";
+ p.innerHTML="🌸";
+ p.style.left=Math.random()*100+"vw";
+ p.style.animationDuration=10+Math.random()*6+"s";
+ document.body.appendChild(p);
+ setTimeout(()=>p.remove(),16000);
+},1800);
+
+/* Shooting star */
+setInterval(()=>{
+ let sh=document.createElement("div");
+ sh.className="shoot";
+ sh.style.top=10+Math.random()*40+"%";
+ document.body.appendChild(sh);
+ setTimeout(()=>sh.remove(),2600);
+},9000);
+
+/* Typing */
+function typeText(el){
+ let text=el.dataset.text;
+ el.innerHTML="";
+ let i=0;
+ let cursor=document.createElement("span");
+ cursor.className="cursor";
+ el.appendChild(cursor);
+
+ let t=setInterval(()=>{
+  if(i<text.length){
+   cursor.insertAdjacentText("beforebegin",text[i]);
+   i++;
+  }else{
+   clearInterval(t);
+   cursor.remove();
+  }
+ },90);
+}
+
+let pages=document.querySelectorAll(".page");
+let btn=document.getElementById("nextBtn");
+let index=0;
+
+typeText(pages[0].querySelector(".content"));
+
+btn.onclick=()=>{
+ pages[index].classList.remove("active");
+ index++;
+ if(index>=pages.length){
+  btn.classList.add("hide");
+  return;
+ }
+ pages[index].classList.add("active");
+ typeText(pages[index].querySelector(".content"));
+};
+
+/* 🎶 Music control */
+const song=document.getElementById("loveSong");
+const musicBtn=document.getElementById("musicBtn");
+
+document.body.addEventListener("click",()=>{
+ song.volume=0.6;
+ song.play();
+},{once:true});
+
+musicBtn.onclick=()=>{
+ if(song.paused){
+  song.play(); musicBtn.innerHTML="🔊 Music";
+ }else{
+  song.pause(); musicBtn.innerHTML="🔈 Muted";
+ }
+};
+</script>
+
+</body>
+</html>
